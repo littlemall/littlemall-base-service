@@ -15,6 +15,13 @@ class SpecService extends Service {
       return results
    }
 
+   //根据商品规格ID 查询商品规格数据
+   async querySpecBySpecId(specId){
+      let SQL = 'SELECT * FROM ns_goods_spec INNER JOIN ns_goods_spec_value ON ns_goods_spec.spec_id = ns_goods_spec_value.spec_id WHERE ns_goods_spec.spec_id='+specId+'';
+      const results = await this.app.mysql.query(SQL);
+      return results;
+   }
+
    //添加商品规格数据
    async addSpec(data) {
       //持久化商品规格数据

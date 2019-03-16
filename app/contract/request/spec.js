@@ -13,6 +13,14 @@ module.exports = {
     },
   },
 
+  querySpecDetail: {
+    specId: {
+      type: 'number',
+      required: true,
+      example: '0'
+    }
+  },
+
   addSpec: {
     specName: {
       type: 'string',
@@ -44,10 +52,10 @@ module.exports = {
       required: true,
       example: '这是一个材质属性'
     },
-    
+
   },
-  delSpec:{
-    specId:{
+  delSpec: {
+    specId: {
       type: 'number',
       required: true,
       example: '0'

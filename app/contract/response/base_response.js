@@ -29,5 +29,17 @@ module.exports = {
     msg: {
       type: 'string'
     }
+  },
+  query_good_spec_detail:{
+    code: {
+      type: 'number',
+      required: true
+    },
+    msg: {
+      type: 'string'
+    },
+    data:{
+      type:'Specwrap',required: true
+    }
   }
 };
