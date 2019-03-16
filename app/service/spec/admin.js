@@ -26,14 +26,14 @@ class SpecService extends Service {
          is_screen: data.isScreen,
          spec_des: data.specDesc,
          create_time: data.createTime,
-         update_time:data.updateTime
+         update_time: data.updateTime
       })
       //const insertSuccess = result.affectedRows === 1;
       return result;
    }
 
    //添加商品规格属性值
-   async addSpecVal(data){
+   async addSpecVal(data) {
       //持久化商品规格值数据
       const result = await this.app.mysql.insert('ns_goods_spec_value', {
          spec_value_name: data.specValueName,
@@ -41,8 +41,24 @@ class SpecService extends Service {
          spec_id: data.specId,
          sort: data.sort,
          create_time: data.createTime,
-         update_time:data.updateTime
+         update_time: data.updateTime
       })
+      return result;
+   }
+
+   //根据规格ID 删除规格
+   async delSpecById(specId) {
+      const result = await this.app.mysql.delete('ns_goods_spec', {
+         spec_id: specId,
+      });
+      return result;
+   }
+
+   //根据规格ID 删除规格属性
+   async delSpecValById(specId) {
+      const result = await this.app.mysql.delete('ns_goods_spec_value', {
+         spec_id: specId,
+      });
       return result;
    }
 }

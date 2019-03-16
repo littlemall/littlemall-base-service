@@ -20,5 +20,14 @@ module.exports = {
     msg: {
       type: 'string'
     }
+  },
+  del_good_spec:{
+    code: {
+      type: 'number',
+      required: true
+    },
+    msg: {
+      type: 'string'
+    }
   }
 };

@@ -22,7 +22,6 @@ class SpecController extends Controller {
     try {
       let currentPage = ctx.query.currentPage;
       let pageSize = ctx.query.pageSize;
-      console.log(currentPage, pageSize);
       let result = await ctx.service.spec.admin.querySpecList(currentPage, pageSize);
       this.success({
         items: result
@@ -77,7 +76,6 @@ class SpecController extends Controller {
 
       let specValuesArr = JSON.parse(specValues);
       for (let i = 0; i < specValuesArr.length; i++) {
-        console.log('is_visible:' + addData.isVisible)
         let valData = {
           specValueName: specValuesArr[i].name,
           specId: specId,
@@ -93,6 +91,32 @@ class SpecController extends Controller {
       })
     } catch (error) {
       ctx.logger.error(new Error('addspecdata controller exception!!!' + error.message));
+      this.fail({
+        msg: error.message
+      })
+    }
+  }
+
+    /**
+   * @Summary 根据商品规格id,删除商品规格
+   * @Router POST /spec/admin/del_good_spec
+   * @Request body delSpec *body specInfo
+   * @Response 200 del_good_spec
+   * @Response 400 del_good_spec
+   */
+  async delspecdatabyid(){
+    const {
+      ctx
+    } = this;
+    try {
+      let specId = ctx.request.body.specId; //商品规格ID
+      let delSpecRes = await ctx.service.spec.admin.delSpecById(specId);
+      let delSpecValRes = await ctx.service.spec.admin.delSpecValById(specId);
+      this.success({
+        isDel: true
+      })
+    } catch (error) {
+      ctx.logger.error(new Error('delspecdatabyid controller exception!!!' + error.message));
       this.fail({
         msg: error.message
       })

@@ -44,5 +44,13 @@ module.exports = {
       required: true,
       example: '这是一个材质属性'
     },
+    
+  },
+  delSpec:{
+    specId:{
+      type: 'number',
+      required: true,
+      example: '0'
+    }
   }
 };
