@@ -11,5 +11,14 @@ module.exports = {
     data:{
       type:'Specwrap',required: true
     }
+  },
+  add_good_spec:{
+    code: {
+      type: 'number',
+      required: true
+    },
+    msg: {
+      type: 'string'
+    }
   }
 };

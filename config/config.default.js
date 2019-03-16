@@ -67,7 +67,7 @@ module.exports = appInfo => {
       port: '3306',
       user: 'root',
       password: '12345678',
-      database: 'niushop_b2c',
+      database: 'littlemall_base',
     },
     // load into app, default true
     app: true,
