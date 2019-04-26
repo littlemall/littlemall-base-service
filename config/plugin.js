@@ -9,8 +9,8 @@ module.exports = {
     enable: true,
     package: 'egg-swagger-doc',
   },
-  'raven': {
-    enable: true,
-    package: 'egg-raven',
-  },
+  // 'raven': {
+  //   enable: true,
+  //   package: 'egg-raven',
+  // },
 }

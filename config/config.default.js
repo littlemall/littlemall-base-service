@@ -83,7 +83,7 @@ module.exports = appInfo => {
   };
 
   config.raven = {
-    dsn: '',
+    dsn: 'https//f89210c311a14869bdd5283868b8c369@127.0.0.1:9000r/littlemall-node-service',
     options: {
       // refer to https://docs.sentry.io/clients/node/config/#optional-settings for more options detail.
       autoBreadcrumbs: {
