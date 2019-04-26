@@ -5,9 +5,12 @@ module.exports = {
     enable: true,
     package: 'egg-mysql',
   },
-
-  'swaggerdoc' : {
+  'swaggerdoc': {
     enable: true,
     package: 'egg-swagger-doc',
-  }
+  },
+  'raven': {
+    enable: true,
+    package: 'egg-raven',
+  },
 }

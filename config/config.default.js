@@ -82,6 +82,17 @@ module.exports = appInfo => {
     // myAppName: 'egg',
   };
 
+  config.raven = {
+    dsn: '',
+    options: {
+      // refer to https://docs.sentry.io/clients/node/config/#optional-settings for more options detail.
+      autoBreadcrumbs: {
+        http: true
+      },
+      release: '3936e6c067be11e9b5f30242ac120007'
+    }
+  }
+
   return {
     ...config,
     ...userConfig,
