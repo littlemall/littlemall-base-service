@@ -82,16 +82,16 @@ module.exports = appInfo => {
     // myAppName: 'egg',
   };
 
-  config.raven = {
-    dsn: 'https//f89210c311a14869bdd5283868b8c369@127.0.0.1:9000r/littlemall-node-service',
-    options: {
-      // refer to https://docs.sentry.io/clients/node/config/#optional-settings for more options detail.
-      autoBreadcrumbs: {
-        http: true
-      },
-      release: '3936e6c067be11e9b5f30242ac120007'
-    }
-  }
+  // config.raven = {
+  //   dsn: 'https//f89210c311a14869bdd5283868b8c369@127.0.0.1:9000r/littlemall-node-service',
+  //   options: {
+  //     // refer to https://docs.sentry.io/clients/node/config/#optional-settings for more options detail.
+  //     autoBreadcrumbs: {
+  //       http: true
+  //     },
+  //     release: '3936e6c067be11e9b5f30242ac120007'
+  //   }
+  // }
 
   return {
     ...config,
