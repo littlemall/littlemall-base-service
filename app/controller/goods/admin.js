@@ -22,15 +22,24 @@ class GoodsController extends Controller {
                 this.fail('PARAMS_ERROR');
                 return;
             }
-            // const res = await ctx.model.Account.findAndCountAll({
-            //     offset,
-            //     limit,
-            // })
-            // this.success(res);
-            this.success();
+            const res = await ctx.service.goods.admin.querylist({
+                offset,
+                limit,
+            })
+            this.success(res);
         } catch (error) {
             this.fail('API_ERROR')
             ctx.logger.error('queryGoodsList error:', error);
+        }
+    }
+
+    async addGood() {
+        const { ctx, app } = this;
+        try {
+
+        } catch (error) {
+            this.fail('API_ERROR')
+            ctx.logger.error('addGood error:', error);
         }
     }
 
