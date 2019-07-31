@@ -36,6 +36,31 @@ class GoodsController extends Controller {
     async addGood() {
         const { ctx, app } = this;
         try {
+            const {
+                name,         // 必须
+                category_id,  // 必须
+                promotion,
+                keyword,
+                unit,
+                tags,
+                brand_id,
+                supplier_id,
+                base_sale,
+                base_click,
+                base_share,
+                product_code,
+                starttime,
+                validity_period,
+                inventory,
+                inventory_warn,
+                place,
+                sku_ids,
+                photo,
+                type_id,
+                media,
+                detail,
+                status,      //defalut 0
+            } = ctx.request.body
 
         } catch (error) {
             this.fail('API_ERROR')
