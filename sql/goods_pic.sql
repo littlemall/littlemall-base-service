@@ -1,5 +1,5 @@
 CREATE TABLE `goods_pic` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `album_id` int(11) NOT NULL,
   `path` varchar(512) DEFAULT NULL,
   `size` varchar(45) DEFAULT NULL COMMENT '图片尺寸\n',

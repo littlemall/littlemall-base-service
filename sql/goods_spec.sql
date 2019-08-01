@@ -1,5 +1,5 @@
 CREATE TABLE `goods_spec` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
   `sort` int(11) DEFAULT '1',
   `is_used` smallint(2) DEFAULT '1' COMMENT '0 -> not used  1-> used',

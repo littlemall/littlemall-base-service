@@ -1,5 +1,5 @@
 CREATE TABLE `goods_category` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `pid` int(11) DEFAULT NULL,
   `name` varchar(128) DEFAULT NULL,
   `name_simple` varchar(128) DEFAULT NULL,

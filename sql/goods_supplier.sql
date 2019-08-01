@@ -1,5 +1,5 @@
 CREATE TABLE `goods_supplier` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(128) DEFAULT NULL,
   `contact` varchar(128) DEFAULT NULL,
   `phone` varchar(45) DEFAULT NULL,

@@ -1,5 +1,5 @@
 CREATE TABLE `goods_type` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
   `sort` int(11) DEFAULT '1',
   `is_used` smallint(2) DEFAULT '1',

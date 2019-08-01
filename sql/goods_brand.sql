@@ -1,5 +1,5 @@
 CREATE TABLE `goods_brand` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) DEFAULT NULL,
   `desc` varchar(256) DEFAULT NULL,
   `is_recommend` smallint(2) DEFAULT '0' COMMENT '0 -> no  1-> yes',

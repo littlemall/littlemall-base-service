@@ -12,6 +12,7 @@
     "egg-raven": "^1.0.0",
     "egg-scripts": "^2.11.0",
     "egg-sentry": "^1.0.0",
+    "sequelize": "^5.12.2",
     "egg-sequelize": "^5.2.0",
     "egg-swagger-doc": "^2.2.9",
     "moment": "^2.24.0",

@@ -2,6 +2,8 @@
 
 'use strict';
 
+const Sequelize = require('sequelize')
+
 /**
  * @param {Egg.EggAppInfo} appInfo app info
  */
@@ -59,6 +61,10 @@ module.exports = appInfo => {
     routerMap: false,
     enable: true,
   };
+
+  config.sequelizeOp={
+    Sequelize,
+  }
 
 
   config.sequelize = {

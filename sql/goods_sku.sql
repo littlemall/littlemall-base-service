@@ -1,5 +1,5 @@
 CREATE TABLE `goods_sku` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `goods_id` int(11) NOT NULL,
   `name` varchar(128) NOT NULL,
   `attr_values_items` varchar(256) DEFAULT NULL,

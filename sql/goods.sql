@@ -1,5 +1,5 @@
 CREATE TABLE `goods` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(256) NOT NULL,
   `category_id` int(11) DEFAULT NULL,
   `promotion` varchar(256) DEFAULT NULL,
@@ -22,8 +22,8 @@ CREATE TABLE `goods` (
   `type_id` int(11) DEFAULT NULL COMMENT '商品类型\n',
   `media` varchar(256) DEFAULT NULL,
   `detail` blob COMMENT '商品详情\n',
-  `status` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT '0',
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
