@@ -30,6 +30,13 @@ module.exports = appInfo => {
     }
   }
 
+
+  config.cors = { // 解决跨域访问
+    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
+    credentials: true,
+    origin: () => '*', // 这边不能为*号，需要指定明确的、与请求网页一致的域名
+  };
+
   config.swaggerdoc = {
     dirScanner: './app/controller',
     apiInfo: {

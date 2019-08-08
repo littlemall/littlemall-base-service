@@ -67,10 +67,6 @@ class GoodsController extends Controller {
                 return;
             }
 
-            if (!page || !size) {
-                this.fail('PARAMS_ERROR');
-                return;
-            }
             const res = await ctx.service.goods.admin.querylist({
                 offset,
                 limit,

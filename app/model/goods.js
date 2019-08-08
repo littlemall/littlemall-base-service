@@ -38,10 +38,10 @@ module.exports = app => {
     });
 
     Goods.associate = () => {
-        app.model.Goods.hasOne(app.model.Goodscategory, { foreignKey: 'category_id', targetKey: 'id' });
-        app.model.Goods.hasOne(app.model.Goodsbrand, { foreignKey: 'brand_id', targetKey: 'id' });
-        app.model.Goods.hasOne(app.model.Goodssupplier, { foreignKey: 'supplier_id', targetKey: 'id' });
-        app.model.Goods.hasOne(app.model.Goodstype, { foreignKey: 'type_id', targetKey: 'id' });
+        app.model.Goods.belongsTo(app.model.Goodscategory, { foreignKey: 'category_id', targetKey: 'id' });
+        app.model.Goods.belongsTo(app.model.Goodsbrand, { foreignKey: 'brand_id', targetKey: 'id' });
+        app.model.Goods.belongsTo(app.model.Goodssupplier, { foreignKey: 'supplier_id', targetKey: 'id' });
+        app.model.Goods.belongsTo(app.model.Goodstype, { foreignKey: 'type_id', targetKey: 'id' });
     }
 
     return Goods;

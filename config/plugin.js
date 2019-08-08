@@ -9,6 +9,11 @@ module.exports = {
     enable: true,
     package: 'egg-swagger-doc',
   },
+  // for cors request
+  'cors': {
+    enable: true,
+    package: 'egg-cors',
+  },
   // 'raven': {
   //   enable: true,
   //   package: 'egg-raven',

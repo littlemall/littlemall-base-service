@@ -19,7 +19,7 @@ module.exports = app => {
     });
 
     Goodsbrand.associate = () => {
-        app.model.Goodsbrand.belongsTo(app.model.Goods,{foreignKey: 'type_id', targetKey: 'id'});
+       app.model.Goodsbrand.hasOne(app.model.Goods,{foreignKey: 'brand_id', targetKey: 'id'});
     }
 
     return Goodsbrand;
