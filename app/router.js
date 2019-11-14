@@ -36,6 +36,9 @@ module.exports = app => {
   router.get('/goods/admin/query_type', controller.goodstype.admin.queryGoodsTypeById);
   router.post('/goods/admin/update_type', controller.goodstype.admin.updateGoodsTypeById);
 
+  //pic
+  router.post('/goods/admin/upload_pic', controller.goodspic.admin.uploadGoodsPicAction);
+
   // router.get('/spec/admin/query_good_spec_list', controller.spec.admin.queryspeclist);
   // router.get('/spec/admin/query_good_spec_detail', controller.spec.admin.querySpecDetail);
   // router.post('/spec/admin/add_good_spec', controller.spec.admin.addspecdata);
