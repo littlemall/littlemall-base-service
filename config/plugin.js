@@ -14,6 +14,11 @@ module.exports = {
     enable: true,
     package: 'egg-cors',
   },
+
+  // 'consulPlus': {
+  //   enable: true,
+  //   package: 'egg-consul-plus',
+  // }
   // 'raven': {
   //   enable: true,
   //   package: 'egg-raven',

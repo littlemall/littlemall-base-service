@@ -8,7 +8,7 @@ module.exports = app => {
         DATE,
     } = app.Sequelize;
 
-    const Goodsspec = app.model.define('goods_spec', {
+    const Goodsspec = app.model.define('good_goodsspec', {
         name: STRING(45),
         sort: INTEGER,
         is_used: INTEGER,

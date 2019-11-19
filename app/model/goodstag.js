@@ -8,7 +8,7 @@ module.exports = app => {
         DATE,
     } = app.Sequelize;
 
-    const Goodstag = app.model.define('goods_tag', {
+    const Goodstag = app.model.define('good_goodstag', {
         name: STRING(128),
         sort: INTEGER,
         photo: STRING(256),

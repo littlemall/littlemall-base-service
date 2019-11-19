@@ -8,7 +8,7 @@ module.exports = app => {
         DATE,
     } = app.Sequelize;
 
-    const Goodspic = app.model.define('goods_pic', {
+    const Goodspic = app.model.define('good_goodspic', {
         album_id: INTEGER,
         path: STRING(512),
         size: STRING(45),

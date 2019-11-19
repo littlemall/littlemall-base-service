@@ -10,7 +10,7 @@ module.exports = app => {
         TEXT,
     } = app.Sequelize;
 
-    const Goodssku = app.model.define('goods_sku', {
+    const Goodssku = app.model.define('good_goodssku', {
         goods_id: INTEGER,
         name: STRING(128),
         attr_values_items: STRING(256),
