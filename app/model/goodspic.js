@@ -18,5 +18,9 @@ module.exports = app => {
         updated_at: DATE,
     });
 
+    Goodspic.associate = () => {
+        app.model.Goodspic.belongsTo(app.model.Goodscategory, { foreignKey: 'album_id', targetKey: 'id' });
+    }
+
     return Goodspic;
 };

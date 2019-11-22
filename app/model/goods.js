@@ -28,7 +28,7 @@ module.exports = app => {
         inventory_warn: INTEGER,
         place: STRING(256),
         sku_ids: STRING(512),
-        photo: STRING(256),
+        photo: STRING(2048),
         type_id: INTEGER,
         media: STRING(256),
         detail: TEXT,

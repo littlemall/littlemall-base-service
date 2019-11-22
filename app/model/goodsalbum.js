@@ -5,7 +5,6 @@ module.exports = app => {
     const {
         STRING,
         INTEGER,
-        TEXT,
         DATE,
     } = app.Sequelize;
 
@@ -15,6 +14,10 @@ module.exports = app => {
         created_at: DATE,
         updated_at: DATE,
     });
+
+    Goodsalbum.associate = () => {
+        app.model.Goodsalbum.hasOne(app.model.Goodspic,{foreignKey: 'album_id', targetKey: 'id'});
+    }
 
     return Goodsalbum;
 };
