@@ -140,7 +140,7 @@ class GoodsController extends Controller {
                 type_id,
                 media,
                 detail,
-                status,
+                status:0,
             }
             const res = await ctx.service.goods.admin.create(params);
             this.success(res);

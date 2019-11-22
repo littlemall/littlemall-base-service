@@ -7,7 +7,7 @@ const Controller = require('../../core/base_controller');
  */
 class GoodsCategoryController extends Controller {
 
-    async addCategory(){
+    async addCategory() {
         const { ctx, app } = this;
         try {
             const {
@@ -26,7 +26,7 @@ class GoodsCategoryController extends Controller {
                 return;
             }
 
-            let params= {
+            let params = {
                 pid,         // 必须
                 name,
                 name_simple,
@@ -45,7 +45,40 @@ class GoodsCategoryController extends Controller {
         }
     }
 
-    async queryGoodsCategoryList(){
+    async queryGoodsCategoryTree() {
+        const { ctx } = this;
+        try {
+            let arr = await ctx.service.goodscategory.admin.query()
+            arr = JSON.parse(JSON.stringify(arr));
+            const result = this.arrayToTree(arr,0);
+            this.success(result);
+        } catch (error) {
+            this.fail('API_ERROR')
+            ctx.logger.error('queryGoodsCategoryTree error:', error);
+        }
+    }
+
+    arrayToTree(arr, parentId) {
+        //  arr 是返回的数据  parendId 父id
+        let temp = [];
+        let treeArr = arr;
+        let _this = this;
+        treeArr.forEach((item, index) => {
+            if (item.pid == parentId) {
+                console.log(_this.arrayToTree(treeArr, treeArr[index].id).length > 0);
+                if (_this.arrayToTree(treeArr, treeArr[index].id).length > 0) {
+                    // 递归调用此函数
+                    treeArr[index].children =  _this.arrayToTree(treeArr, treeArr[index].id);
+                }
+                treeArr[index].value = treeArr[index].id
+                treeArr[index].label = treeArr[index].name
+                temp.push(treeArr[index]);
+            }
+        });
+        return temp;
+    }
+
+    async queryGoodsCategoryList() {
         const { ctx } = this;
         try {
             const { size, page } = ctx.query;
@@ -67,7 +100,7 @@ class GoodsCategoryController extends Controller {
         }
     }
 
-    async queryGoodsCategoryById(){
+    async queryGoodsCategoryById() {
         const { ctx, app } = this;
         try {
             const { id } = ctx.query;
@@ -83,7 +116,7 @@ class GoodsCategoryController extends Controller {
         }
     }
 
-    async updateGoodsCategoryById(){
+    async updateGoodsCategoryById() {
         const { ctx, app } = this;
         try {
             let res = {};
@@ -100,7 +133,7 @@ class GoodsCategoryController extends Controller {
                 desc,
             } = ctx.request.body
 
-            let params= {
+            let params = {
                 pid,         // 必须
                 name,
                 name_simple,
@@ -116,7 +149,7 @@ class GoodsCategoryController extends Controller {
                     id,
                 },
             })
-            if(categorys.length > 0){
+            if (categorys.length > 0) {
                 const category = categorys[0];
                 res = await category.update(params)
             }
