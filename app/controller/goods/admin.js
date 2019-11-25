@@ -83,6 +83,82 @@ class GoodsController extends Controller {
         }
     }
 
+    // 更新商品信息接口
+    async updateGood() {
+        const { ctx, app } = this;
+        try {
+            const {
+                id,
+                name,         // 必须
+                category_id,
+                promotion,
+                keyword,
+                unit,
+                tags,
+                brand_id,
+                supplier_id,
+                base_sale,
+                base_click,
+                base_share,
+                product_code,
+                starttime,
+                validity_period,
+                inventory,
+                inventory_warn,
+                place,
+                sku_ids,
+                photo,
+                type_id,
+                media,
+                detail,
+                status,      //defalut 0
+            } = ctx.request.body
+            if (!id) {
+                this.fail('PARAMS_ERROR');
+                return;
+            }
+            const goods = await ctx.service.goods.admin.query({
+                where: {
+                    id,
+                }
+            })
+            console.log(goods.length)
+            if (goods.length > 0) {
+                const good = goods[0];
+                let params = {
+                    name,         // 必须
+                    category_id,
+                    promotion,
+                    keyword,
+                    unit,
+                    tags,
+                    brand_id,
+                    supplier_id,
+                    base_sale,
+                    base_click,
+                    base_share,
+                    product_code,
+                    starttime,
+                    validity_period,
+                    inventory,
+                    inventory_warn,
+                    place,
+                    sku_ids,
+                    photo,
+                    type_id,
+                    media,
+                    detail,
+                    status,
+                }
+                await good.update(params)
+            }
+            this.success();
+        } catch (error) {
+            this.fail('API_ERROR')
+            ctx.logger.error('updateGood error:', error);
+        }
+    }
+
     // 添加商品信息接口
     async addGood() {
         const { ctx, app } = this;
@@ -110,7 +186,6 @@ class GoodsController extends Controller {
                 type_id,
                 media,
                 detail,
-                status,      //defalut 0
             } = ctx.request.body
             if (!name) {
                 this.fail('PARAMS_ERROR');
@@ -140,7 +215,7 @@ class GoodsController extends Controller {
                 type_id,
                 media,
                 detail,
-                status:0,
+                status: 0,
             }
             const res = await ctx.service.goods.admin.create(params);
             this.success(res);
