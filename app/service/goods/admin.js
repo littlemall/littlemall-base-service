@@ -9,12 +9,20 @@ class GoodsService extends Service {
         return await this.ctx.model.Goods.findAll(query)
     }
 
+    async querySku(query) {
+        return await this.ctx.model.Goodssku.findAll(query)
+    }
+
     async querylist(query) {
         return await this.ctx.model.Goods.findAndCountAll(query)
     }
 
     async create(obj) {
         return await this.ctx.model.Goods.create(obj)
+    }
+
+    async createSku(obj) {
+        return await this.ctx.model.Goodssku.create(obj)
     }
 
     async delete(obj) {

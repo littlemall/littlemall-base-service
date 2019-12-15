@@ -42,6 +42,7 @@ module.exports = app => {
         app.model.Goods.belongsTo(app.model.Goodsbrand, { foreignKey: 'brand_id', targetKey: 'id' });
         app.model.Goods.belongsTo(app.model.Goodssupplier, { foreignKey: 'supplier_id', targetKey: 'id' });
         app.model.Goods.belongsTo(app.model.Goodstype, { foreignKey: 'type_id', targetKey: 'id' });
+        app.model.Goods.hasMany(app.model.Goodssku,{foreignKey: 'goods_id', targetKey: 'id'});
     }
 
     return Goods;

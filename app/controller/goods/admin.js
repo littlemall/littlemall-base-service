@@ -70,11 +70,17 @@ class GoodsController extends Controller {
             const res = await ctx.service.goods.admin.querylist({
                 offset,
                 limit,
+                distinct: true,
                 where: {
                     status: {
                         [Op.gt]: -1
                     },
-                }
+                },
+                include: [
+                    {
+                        model: app.model.Goodssku,
+                    }
+                ]
             })
             this.success(res);
         } catch (error) {
@@ -106,7 +112,13 @@ class GoodsController extends Controller {
                 inventory,
                 inventory_warn,
                 place,
-                sku_ids,
+                sku_code,
+                sku_name,
+                sku_attr,
+                sku_market_price,
+                sku_price,
+                sku_promote_price,
+                sku_stock,
                 photo,
                 type_id,
                 media,
@@ -122,7 +134,14 @@ class GoodsController extends Controller {
                     id,
                 }
             })
-            console.log(goods.length)
+
+            const goodsku = await ctx.service.goods.admin.querySku({
+                where: {
+                    goods_id:id
+                }
+            })
+
+
             if (goods.length > 0) {
                 const good = goods[0];
                 let params = {
@@ -143,7 +162,6 @@ class GoodsController extends Controller {
                     inventory,
                     inventory_warn,
                     place,
-                    sku_ids,
                     photo,
                     type_id,
                     media,
@@ -151,6 +169,20 @@ class GoodsController extends Controller {
                     status,
                 }
                 await good.update(params)
+            }
+
+            if(goodsku.length > 0){
+                const goodskuObj = goodsku[0];
+                let skuparams = {
+                    code:sku_code,
+                    name:sku_name,
+                    attr_values_items:sku_attr,
+                    market_price:sku_market_price,
+                    price:sku_price,
+                    promote_price:sku_promote_price,
+                    stocks:sku_stock,
+                }
+                await goodskuObj.update(skuparams)
             }
             this.success();
         } catch (error) {
@@ -181,7 +213,13 @@ class GoodsController extends Controller {
                 inventory,
                 inventory_warn,
                 place,
-                sku_ids,
+                sku_code,
+                sku_name,
+                sku_attr,
+                sku_market_price,
+                sku_price,
+                sku_promote_price,
+                sku_stock,
                 photo,
                 type_id,
                 media,
@@ -210,7 +248,6 @@ class GoodsController extends Controller {
                 inventory,
                 inventory_warn,
                 place,
-                sku_ids,
                 photo,
                 type_id,
                 media,
@@ -218,6 +255,22 @@ class GoodsController extends Controller {
                 status: 0,
             }
             const res = await ctx.service.goods.admin.create(params);
+            const goods_id = res.id;
+
+            if(sku_code){
+                let skuparams = {
+                    goods_id,
+                    code:sku_code,
+                    name:sku_name,
+                    attr_values_items:sku_attr,
+                    market_price:sku_market_price,
+                    price:sku_price,
+                    promote_price:sku_promote_price,
+                    stocks:sku_stock,
+                }
+                const ressku = await ctx.service.goods.admin.createSku(skuparams);
+            }
+
             this.success(res);
         } catch (error) {
             this.fail('API_ERROR')

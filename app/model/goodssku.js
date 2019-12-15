@@ -27,5 +27,9 @@ module.exports = app => {
         updated_at: DATE,
     });
 
+    Goodssku.associate = () => {
+        app.model.Goodssku.belongsTo(app.model.Goods, { foreignKey: 'goods_id', targetKey: 'id' });
+    }
+
     return Goodssku;
 };
