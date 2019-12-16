@@ -11,7 +11,7 @@ module.exports = app => {
 
     const Goods = app.model.define('good_goods', {
         name: STRING(45),
-        category_id: INTEGER,
+        category_id: STRING(256),
         promotion: STRING(256),
         keyword: STRING(256),
         unit: STRING(45),

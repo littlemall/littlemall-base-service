@@ -1,7 +1,7 @@
 CREATE TABLE `goods` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(256) NOT NULL,
-  `category_id` int(11) DEFAULT NULL,
+  `category_id` varchar(256) DEFAULT NULL,
   `promotion` varchar(256) DEFAULT NULL,
   `keyword` varchar(256) DEFAULT NULL,
   `unit` varchar(45) DEFAULT NULL,
