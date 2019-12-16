@@ -39,12 +39,18 @@ class GoodsController extends Controller {
         try {
             const { id } = ctx.query;
             const res = await ctx.service.goods.admin.query({
+                distinct: true,
                 where: {
                     id,
                     status: {
                         [Op.gt]: -1
                     },
                 },
+                include: [
+                    {
+                        model: app.model.Goodssku,
+                    }
+                ]
             })
             this.success(res);
         } catch (error) {
