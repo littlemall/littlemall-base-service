@@ -49,7 +49,16 @@ class GoodsController extends Controller {
                 include: [
                     {
                         model: app.model.Goodssku,
-                    }
+                    },
+                    {
+                        model: app.model.Goodsbrand,
+                    },
+                    {
+                        model: app.model.Goodssupplier,
+                    },
+                    {
+                        model: app.model.Goodstype,
+                    },
                 ]
             })
             this.success(res);
@@ -85,7 +94,16 @@ class GoodsController extends Controller {
                 include: [
                     {
                         model: app.model.Goodssku,
-                    }
+                    },
+                    {
+                        model: app.model.Goodsbrand,
+                    },
+                    {
+                        model: app.model.Goodssupplier,
+                    },
+                    {
+                        model: app.model.Goodstype,
+                    },
                 ]
             })
             this.success(res);
