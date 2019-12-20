@@ -2,25 +2,25 @@
 'use strict';
 
 module.exports = app => {
-    const {
-        STRING,
-        INTEGER,
-        DATE,
-    } = app.Sequelize;
+  const {
+    STRING,
+    INTEGER,
+    DATE,
+  } = app.Sequelize;
 
-    const Goodstype = app.model.define('good_goodstype', {
-        name: STRING(45),
-        sort: INTEGER,
-        is_used: INTEGER,
-        attrs: STRING(256),
-        created_at: DATE,
-        updated_at: DATE,
-    });
+  const Goodstype = app.model.define('good_goodstype', {
+    name: STRING(45),
+    sort: INTEGER,
+    is_used: INTEGER,
+    attrs: STRING(256),
+    created_at: DATE,
+    updated_at: DATE,
+  });
 
 
-    Goodstype.associate = () => {
-        app.model.Goodstype.hasOne(app.model.Goods,{foreignKey: 'type_id', targetKey: 'id'});
-    }
+  Goodstype.associate = () => {
+    app.model.Goodstype.hasOne(app.model.Goods, { foreignKey: 'type_id', targetKey: 'id' });
+  };
 
-    return Goodstype;
+  return Goodstype;
 };

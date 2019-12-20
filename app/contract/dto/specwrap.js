@@ -1,5 +1,5 @@
 'use strict';
 
 exports.Specwrap = {
-  item: {type: 'array' , itemType: 'Spec' },
+  item: { type: 'array', itemType: 'Spec' },
 };

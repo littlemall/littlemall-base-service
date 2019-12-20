@@ -3,43 +3,43 @@ module.exports = {
   query_good_spec_list: {
     code: {
       type: 'number',
-      required: true
+      required: true,
     },
     msg: {
-      type: 'string'
+      type: 'string',
     },
-    data:{
-      type:'Specwrap',required: true
-    }
+    data: {
+      type: 'Specwrap', required: true,
+    },
   },
-  add_good_spec:{
+  add_good_spec: {
     code: {
       type: 'number',
-      required: true
+      required: true,
     },
     msg: {
-      type: 'string'
-    }
+      type: 'string',
+    },
   },
-  del_good_spec:{
+  del_good_spec: {
     code: {
       type: 'number',
-      required: true
+      required: true,
     },
     msg: {
-      type: 'string'
-    }
+      type: 'string',
+    },
   },
-  query_good_spec_detail:{
+  query_good_spec_detail: {
     code: {
       type: 'number',
-      required: true
+      required: true,
     },
     msg: {
-      type: 'string'
+      type: 'string',
     },
-    data:{
-      type:'Specwrap',required: true
-    }
-  }
+    data: {
+      type: 'Specwrap', required: true,
+    },
+  },
 };

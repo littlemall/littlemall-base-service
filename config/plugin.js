@@ -1,16 +1,16 @@
 'use strict';
 module.exports = {
 
-  "sequelize": {
+  sequelize: {
     enable: true,
     package: 'egg-sequelize',
   },
-  'swaggerdoc': {
+  swaggerdoc: {
     enable: true,
     package: 'egg-swagger-doc',
   },
   // for cors request
-  'cors': {
+  cors: {
     enable: true,
     package: 'egg-cors',
   },
@@ -23,4 +23,4 @@ module.exports = {
   //   enable: true,
   //   package: 'egg-raven',
   // },
-}
+};

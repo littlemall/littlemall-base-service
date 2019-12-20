@@ -1,3 +1,4 @@
+'use strict';
 const Service = require('egg').Service;
 
 /**
@@ -5,23 +6,23 @@ const Service = require('egg').Service;
  */
 class GoodsCategoryService extends Service {
 
-    async query(query) {
-        return await this.ctx.model.Goodscategory.findAll(query)
-    }
+  async query(query) {
+    return await this.ctx.model.Goodscategory.findAll(query);
+  }
 
-    async querylist(query) {
-        return await this.ctx.model.Goodscategory.findAndCountAll(query)
-    }
+  async querylist(query) {
+    return await this.ctx.model.Goodscategory.findAndCountAll(query);
+  }
 
-    async create(obj) {
-        return await this.ctx.model.Goodscategory.create(obj)
-    }
+  async create(obj) {
+    return await this.ctx.model.Goodscategory.create(obj);
+  }
 
-    async delete(obj) {
-        return await obj.update({
-            status: -1,
-        })
-    }
+  async delete(obj) {
+    return await obj.update({
+      status: -1,
+    });
+  }
 
 }
 

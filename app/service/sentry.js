@@ -16,7 +16,7 @@ class SentryService extends Service {
     // ignore HTTP Error
     return !(err.status && err.status > 500);
   }
-  
+
   // user information
   get user() {
     return this.ctx.session.user;
