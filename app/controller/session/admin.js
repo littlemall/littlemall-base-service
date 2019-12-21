@@ -7,6 +7,63 @@ const Controller = require('../../core/base_controller');
  */
 class SessionController extends Controller {
 
+  // 批量台添加专场与商品关系接口
+  async addSessionGood() {
+    const { ctx } = this;
+    try {
+      const {
+        arrStr,
+      } = ctx.request.body;
+      const arr = JSON.parse(arrStr);
+      const sessionGoods = await ctx.service.session.admin.createSessionGood(arr);
+      this.success(sessionGoods);
+    } catch (error) {
+      this.fail('API_ERROR');
+      ctx.logger.error('addSessionGood error:', error);
+    }
+  }
+
+  // 批量删除专场商品接口
+  async deleteSessionGood() {
+    const { ctx } = this;
+    try {
+      const {
+        arrStr,
+      } = ctx.request.body;
+      const arr = JSON.parse(arrStr);
+      await ctx.service.session.admin.deleteSessionGood(arr);
+      this.success();
+    } catch (error) {
+      this.fail('API_ERROR');
+      ctx.logger.error('deleteSessionGood error:', error);
+    }
+  }
+
+  // 查询专场数据信息
+  async querySession() {
+    const { ctx, app } = this;
+    try {
+      const { session_id } = ctx.query;
+      const sessions = await ctx.service.session.admin.query({
+        distinct: true,
+        where: {
+          id: session_id,
+        },
+        include: [
+          {
+            model: app.model.Sessiongood,
+          },
+        ],
+      });
+      this.success(sessions);
+    } catch (error) {
+      this.fail('API_ERROR');
+      ctx.logger.error('querySession error:', error);
+    }
+  }
+
+
+  // 添加专场接口
   async addSession() {
     const { ctx } = this;
     try {
@@ -45,6 +102,7 @@ class SessionController extends Controller {
     }
   }
 
+  // 更新专场接口
   async updateSession() {
     const { ctx } = this;
     try {
@@ -94,6 +152,7 @@ class SessionController extends Controller {
     }
   }
 
+  // 查询专场列表接口
   async querySessionList() {
     const { ctx, app } = this;
     try {

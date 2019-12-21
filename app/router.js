@@ -50,9 +50,7 @@ module.exports = app => {
   router.post('/session/admin/update_session', controller.session.admin.updateSession);
   router.get('/session/admin/session_list', controller.session.admin.querySessionList);
   router.post('/session/admin/delete_session', controller.session.admin.deleteSession);
-
-  // router.get('/spec/admin/query_good_spec_list', controller.spec.admin.queryspeclist);
-  // router.get('/spec/admin/query_good_spec_detail', controller.spec.admin.querySpecDetail);
-  // router.post('/spec/admin/add_good_spec', controller.spec.admin.addspecdata);
-  // router.post('/spec/admin/del_good_spec', controller.spec.admin.delspecdatabyid);
+  router.post('/session/admin/add_session_good', controller.session.admin.addSessionGood);
+  router.post('/session/admin/delete_session_good', controller.session.admin.deleteSessionGood);
+  router.get('/session/admin/query_session', controller.session.admin.querySession);
 };

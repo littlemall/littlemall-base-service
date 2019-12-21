@@ -24,7 +24,7 @@ module.exports = app => {
   });
 
   Session.associate = () => {
-    app.model.Session.hasMany(app.model.Sessiongood, { foreignKey: 'seesion_id', targetKey: 'id' });
+    app.model.Session.hasMany(app.model.Sessiongood, { foreignKey: 'session_id', targetKey: 'id' });
   };
 
   return Session;

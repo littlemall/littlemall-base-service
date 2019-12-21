@@ -27,8 +27,22 @@ class SessionService extends Service {
     return await this.ctx.model.Session.create(obj);
   }
 
-  async createSessionGood(obj) {
-    return await this.ctx.model.Sessiongood.create(obj);
+  async createSessionGood(arr) {
+    return await this.ctx.model.Sessiongood.bulkCreate(arr, { updateOnDuplicate: [ 'created_at', 'status', 'updated_at' ] });
+  }
+
+  async deleteSessionGood(arr) {
+    const { Sequelize } = this.app.config.sequelize;
+    const { Op } = Sequelize;
+    await this.ctx.model.Sessiongood.update(
+      {
+        status: -1,
+      },
+      {
+        where: {
+          id: { [Op.in]: arr },
+        },
+      });
   }
 
   async delete(obj) {
