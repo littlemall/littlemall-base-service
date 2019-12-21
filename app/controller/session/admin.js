@@ -35,12 +35,62 @@ class SessionController extends Controller {
         bgcolor,
         start_at,
         end_at,
+        status: 0,
       };
-      const res = await ctx.service.goods.admin.create(params);
-      this.succes(res);
+      const res = await ctx.service.session.admin.create(params);
+      this.success(res);
     } catch (error) {
       this.fail('API_ERROR');
       ctx.logger.error('addSession error:', error);
+    }
+  }
+
+  async updateSession() {
+    const { ctx } = this;
+    try {
+      const {
+        id,
+        name, // 必须
+        keyword,
+        desc,
+        photos,
+        banner_pc,
+        banner_mobile,
+        bgcolor,
+        start_at,
+        end_at,
+        status,
+      } = ctx.request.body;
+      if (!name) {
+        this.fail('PARAMS_ERROR');
+        return;
+      }
+      const sessions = await ctx.service.session.admin.query({
+        where: {
+          id,
+        },
+      });
+
+      if (sessions.length > 0) {
+        const session = sessions[0];
+        const params = {
+          name, // 必须
+          keyword,
+          desc,
+          photos,
+          banner_pc,
+          banner_mobile,
+          bgcolor,
+          start_at,
+          end_at,
+          status,
+        };
+        await session.update(params);
+      }
+      this.success();
+    } catch (error) {
+      this.fail('API_ERROR');
+      ctx.logger.error('updateSession error:', error);
     }
   }
 
@@ -69,6 +119,31 @@ class SessionController extends Controller {
     } catch (error) {
       this.fail('API_ERROR');
       ctx.logger.error('querySessionList error:', error);
+    }
+  }
+
+  async deleteSession() {
+    const { ctx } = this;
+    try {
+      const {
+        id,
+      } = ctx.request.body;
+      const sessions = await ctx.service.session.admin.query({
+        where: {
+          id,
+        },
+      });
+      if (sessions.length > 0) {
+        const session = sessions[0];
+        const params = {
+          status: -1,
+        };
+        await session.update(params);
+      }
+      this.success();
+    } catch (error) {
+      this.fail('API_ERROR');
+      ctx.logger.error('deleteSession error:', error);
     }
   }
 

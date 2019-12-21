@@ -46,6 +46,10 @@ module.exports = app => {
   router.post('/goods/admin/update_goods_pic', controller.goodspic.admin.updateGoodsPicAction);
 
   // session
+  router.post('/session/admin/add_session', controller.session.admin.addSession);
+  router.post('/session/admin/update_session', controller.session.admin.updateSession);
+  router.get('/session/admin/session_list', controller.session.admin.querySessionList);
+  router.post('/session/admin/delete_session', controller.session.admin.deleteSession);
 
   // router.get('/spec/admin/query_good_spec_list', controller.spec.admin.queryspeclist);
   // router.get('/spec/admin/query_good_spec_detail', controller.spec.admin.querySpecDetail);
