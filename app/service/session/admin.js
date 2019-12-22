@@ -27,22 +27,40 @@ class SessionService extends Service {
     return await this.ctx.model.Session.create(obj);
   }
 
-  async createSessionGood(arr) {
-    return await this.ctx.model.Sessiongood.bulkCreate(arr, { updateOnDuplicate: [ 'created_at', 'status', 'updated_at' ] });
+  async createSessionGood(arr, sessions) {
+    const addArr = [];
+    const updateArr = [];
+    for (let i = 0; i < arr.length; i++) {
+      let isHas = false;
+      if (arr[i].id) {
+        updateArr.push(arr[i]);
+      } else {
+        for (let j = 0; j < sessions.length; j++) {
+          if (arr[i].goods_id === sessions[j].goods_id) {
+            isHas = true;
+          }
+        }
+        if (!isHas) {
+          addArr.push(arr[i]);
+        }
+      }
+    }
+    if (updateArr.length > 0) {
+      await this.ctx.model.Sessiongood.bulkCreate(updateArr, { updateOnDuplicate: [ 'created_at', 'status', 'updated_at' ] });
+    }
+    if (addArr.length > 0) {
+      await this.ctx.model.Sessiongood.bulkCreate(addArr, {});
+    }
   }
 
-  async deleteSessionGood(arr) {
-    const { Sequelize } = this.app.config.sequelize;
-    const { Op } = Sequelize;
-    await this.ctx.model.Sessiongood.update(
-      {
-        status: -1,
-      },
+  async deleteSessionGoodService(arr, Op) {
+    const res = await this.ctx.model.Sessiongood.destroy(
       {
         where: {
           id: { [Op.in]: arr },
         },
       });
+    console.log(res);
   }
 
   async delete(obj) {

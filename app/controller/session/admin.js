@@ -12,10 +12,17 @@ class SessionController extends Controller {
     const { ctx } = this;
     try {
       const {
+        session_id,
         arrStr,
       } = ctx.request.body;
       const arr = JSON.parse(arrStr);
-      const sessionGoods = await ctx.service.session.admin.createSessionGood(arr);
+      let sessionGoodsExist = await ctx.service.session.admin.querySessionGood({
+        where: {
+          session_id,
+        },
+      });
+      sessionGoodsExist = JSON.parse(JSON.stringify(sessionGoodsExist));
+      const sessionGoods = await ctx.service.session.admin.createSessionGood(arr, sessionGoodsExist);
       this.success(sessionGoods);
     } catch (error) {
       this.fail('API_ERROR');
@@ -25,13 +32,15 @@ class SessionController extends Controller {
 
   // 批量删除专场商品接口
   async deleteSessionGood() {
-    const { ctx } = this;
+    const { ctx, app } = this;
+    const { Sequelize } = app.config.sequelizeOp;
+    const { Op } = Sequelize;
     try {
       const {
         arrStr,
       } = ctx.request.body;
       const arr = JSON.parse(arrStr);
-      await ctx.service.session.admin.deleteSessionGood(arr);
+      await ctx.service.session.admin.deleteSessionGoodService(arr, Op);
       this.success();
     } catch (error) {
       this.fail('API_ERROR');
@@ -41,24 +50,55 @@ class SessionController extends Controller {
 
   // 查询专场数据信息
   async querySession() {
-    const { ctx, app } = this;
+    const { ctx } = this;
     try {
       const { session_id } = ctx.query;
       const sessions = await ctx.service.session.admin.query({
-        distinct: true,
         where: {
           id: session_id,
         },
-        include: [
-          {
-            model: app.model.Sessiongood,
-          },
-        ],
       });
       this.success(sessions);
     } catch (error) {
       this.fail('API_ERROR');
       ctx.logger.error('querySession error:', error);
+    }
+  }
+
+  async querySessionGoods() {
+    const { ctx, app } = this;
+    try {
+      const { Sequelize } = app.config.sequelizeOp;
+      const { Op } = Sequelize;
+      const { size, page } = ctx.query;
+      const offset = size * (page - 1);
+      const limit = parseInt(size, 10);
+      if (!page || !size) {
+        this.fail('PARAMS_ERROR');
+        return;
+      }
+      const res = await ctx.service.session.admin.querySessionGoodList({
+        distinct: true,
+        offset,
+        limit,
+        where: {
+          status: {
+            [Op.gt]: -1,
+          },
+        },
+        include: [
+          {
+            model: app.model.Goods,
+          },
+          {
+            model: app.model.Session,
+          },
+        ],
+      });
+      this.success(res);
+    } catch (error) {
+      this.fail('API_ERROR');
+      ctx.logger.error('querySessionGoods error:', error);
     }
   }
 
