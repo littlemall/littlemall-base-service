@@ -115,6 +115,7 @@ class SessionController extends Controller {
         banner_pc,
         banner_mobile,
         bgcolor,
+        selecStr,
         start_at,
         end_at,
       } = ctx.request.body;
@@ -135,6 +136,18 @@ class SessionController extends Controller {
         status: 0,
       };
       const res = await ctx.service.session.admin.create(params);
+      const list = selecStr.split(',');
+      const sessionId = res.id;
+      const arr = [];
+      if (list.length > 0) {
+        for (let i = 0; i < list.length; i++) {
+          const obj = {};
+          obj.session_id = sessionId;
+          obj.goods_id = list[i];
+          arr.push(obj);
+        }
+        await ctx.service.session.admin.createSessionGood(arr, res);
+      }
       this.success(res);
     } catch (error) {
       this.fail('API_ERROR');
