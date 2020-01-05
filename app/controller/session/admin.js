@@ -70,22 +70,25 @@ class SessionController extends Controller {
     try {
       const { Sequelize } = app.config.sequelizeOp;
       const { Op } = Sequelize;
-      const { size, page } = ctx.query;
+      const { size, page, session_id } = ctx.query;
       const offset = size * (page - 1);
       const limit = parseInt(size, 10);
       if (!page || !size) {
         this.fail('PARAMS_ERROR');
         return;
       }
+      const query = {};
+      query.status = {
+        [Op.gt]: -1,
+      };
+      if (session_id) {
+        query.session_id = session_id;
+      }
       const res = await ctx.service.session.admin.querySessionGoodList({
         distinct: true,
         offset,
         limit,
-        where: {
-          status: {
-            [Op.gt]: -1,
-          },
-        },
+        where: query,
         include: [
           {
             model: app.model.Goods,
