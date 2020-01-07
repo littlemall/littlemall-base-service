@@ -231,10 +231,10 @@ class SessionController extends Controller {
           status: {
             [Op.gt]: -1,
           },
-          order: [
-            [ 'created_at', 'DESC' ],
-          ],
         },
+        order: [
+          [ 'id', 'DESC' ],
+        ],
       });
       this.success(res);
     } catch (error) {
