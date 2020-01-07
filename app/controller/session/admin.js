@@ -97,6 +97,9 @@ class SessionController extends Controller {
             model: app.model.Session,
           },
         ],
+        order: [
+          [ 'created_at', 'DESC' ],
+        ],
       });
       this.success(res);
     } catch (error) {
@@ -228,6 +231,9 @@ class SessionController extends Controller {
           status: {
             [Op.gt]: -1,
           },
+          order: [
+            [ 'created_at', 'DESC' ],
+          ],
         },
       });
       this.success(res);

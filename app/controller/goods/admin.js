@@ -105,6 +105,9 @@ class GoodsController extends Controller {
             model: app.model.Goodstype,
           },
         ],
+        order: [
+          [ 'created_at', 'DESC' ],
+        ],
       });
       this.success(res);
     } catch (error) {
