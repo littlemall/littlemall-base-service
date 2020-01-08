@@ -12,6 +12,7 @@ module.exports = app => {
   router.get('/goods/admin/query_good', controller.goods.admin.queryGoodById);
   router.post('/goods/admin/del_good', controller.goods.admin.deleteGoodById);
   router.post('/goods/admin/update_good', controller.goods.admin.updateGood);
+  router.post('/goods/admin/kaolaimport', controller.scrat.admin.importKaola);
 
   // category
   router.post('/goods/admin/add_good_category', controller.goodscategory.admin.addCategory);

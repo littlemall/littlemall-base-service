@@ -73,6 +73,7 @@ module.exports = appInfo => {
     Sequelize,
   };
 
+  config.imgprefix = 'http://10.18.120.228:7001';
 
   config.sequelize = {
     dialect: 'mysql',

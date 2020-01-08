@@ -13,4 +13,4 @@ run/
 typings/
 .nyc_output/
 tempfiles/
-app/public/upload/
+app/public/uploads/
