@@ -104,6 +104,9 @@ class GoodsCategoryController extends Controller {
       const res = await ctx.service.goodscategory.admin.querylist({
         offset,
         limit,
+        order: [
+          [ 'created_at', 'DESC' ],
+        ],
       });
       this.success(res);
     } catch (error) {
