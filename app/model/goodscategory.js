@@ -15,6 +15,7 @@ module.exports = app => {
     goods_type: INTEGER,
     is_show: INTEGER,
     sort: INTEGER,
+    level: INTEGER,
     photo: STRING(256),
     keyword: STRING(45),
     desc: STRING(256),

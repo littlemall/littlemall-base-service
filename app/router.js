@@ -42,6 +42,7 @@ module.exports = app => {
 
   // pic
   router.post('/goods/admin/upload_pic', controller.goodspic.admin.uploadGoodsPicAction);
+  router.post('/category/admin/upload_pic', controller.goodspic.admin.uploadCategoryPicAction);
   router.post('/goods/admin/create_album', controller.goodspic.admin.createGoodsAlbum);
   router.get('/goods/admin/query_album_list', controller.goodspic.admin.queryGoodsAlbum);
   router.post('/goods/admin/update_goods_pic', controller.goodspic.admin.updateGoodsPicAction);

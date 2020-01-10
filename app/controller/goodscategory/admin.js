@@ -26,6 +26,17 @@ class GoodsCategoryController extends Controller {
         return;
       }
 
+      const parentCa = await ctx.service.goodscategory.admin.query({
+        where: {
+          id: pid,
+        },
+      });
+
+      let level;
+
+      if (parentCa && parentCa.length > 0) {
+        level = parseInt(parentCa[0].level) + 1;
+      }
       const params = {
         pid, // 必须
         name,
@@ -35,6 +46,7 @@ class GoodsCategoryController extends Controller {
         sort,
         photo,
         keyword,
+        level,
         desc,
       };
       const res = await ctx.service.goodscategory.admin.create(params);

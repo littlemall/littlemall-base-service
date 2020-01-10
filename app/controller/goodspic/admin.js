@@ -38,6 +38,32 @@ class GoodsPicController extends Controller {
     }
   }
 
+  async uploadCategoryPicAction() {
+    const { ctx } = this;
+    try {
+      const {
+        dir,
+      } = ctx.request.body;
+      const targetDir = dir ? dir : 'all';
+      const file = ctx.request.files[0];
+      let { filepath, filename } = file;
+      const data = fs.readFileSync(filepath);
+      filename = filename.toLocaleLowerCase();
+      // console.log(filename);
+      const targetPath = path.join(this.config.baseDir, 'app/public/uploads/category/' + targetDir);
+      await this.mkdirsSync(targetPath);
+      const target = path.join(this.config.baseDir, 'app/public/uploads/category/' + targetDir, filename);
+      await fs.writeFileSync(target, data);
+      this.success({
+        path: `/public/uploads/category/${targetDir}\/${filename}`,
+      });
+    } catch (error) {
+      this.fail('API_ERROR');
+      ctx.logger.error('uploadCategoryPicAction error:', error);
+    }
+  }
+
+
   async uploadGoodsPicAction() {
     const { ctx } = this;
     try {
@@ -62,6 +88,7 @@ class GoodsPicController extends Controller {
       ctx.logger.error('uploadGoodsPicAction error:', error);
     }
   }
+
   async mkdirsSync(dirname) {
     if (fs.existsSync(dirname)) {
       return true;
