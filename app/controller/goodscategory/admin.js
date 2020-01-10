@@ -37,8 +37,10 @@ class GoodsCategoryController extends Controller {
       if (parentCa && parentCa.length > 0) {
         level = parseInt(parentCa[0].level) + 1;
       }
+      const oid = new Date().getTime();
       const params = {
         pid, // 必须
+        oid,
         name,
         name_simple,
         goods_type,
