@@ -56,4 +56,7 @@ module.exports = app => {
   router.post('/session/admin/delete_session_good', controller.session.admin.deleteSessionGood);
   router.get('/session/admin/query_session', controller.session.admin.querySession);
   router.get('/session/admin/session_good_list', controller.session.admin.querySessionGoods);
+
+  // fetch
+  router.get('/scrat/category', controller.scrat.admin.fetchCategory);
 };

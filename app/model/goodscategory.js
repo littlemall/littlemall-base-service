@@ -10,12 +10,14 @@ module.exports = app => {
 
   const Goodscategory = app.model.define('good_goodscategory', {
     name: STRING(128),
+    oid: INTEGER,
     pid: INTEGER,
     name_simple: STRING(128),
     goods_type: INTEGER,
     is_show: INTEGER,
     sort: INTEGER,
     level: INTEGER,
+    oriphoto: STRING(256),
     photo: STRING(256),
     keyword: STRING(45),
     desc: STRING(256),

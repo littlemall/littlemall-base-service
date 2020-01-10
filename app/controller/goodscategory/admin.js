@@ -77,12 +77,12 @@ class GoodsCategoryController extends Controller {
     const _this = this;
     treeArr.forEach((item, index) => {
       if (item.pid === parseInt(parentId)) {
-        console.log(_this.arrayToTree(treeArr, treeArr[index].id).length > 0);
-        if (_this.arrayToTree(treeArr, treeArr[index].id).length > 0) {
+        // console.log(_this.arrayToTree(treeArr, treeArr[index].id).length > 0);
+        if (_this.arrayToTree(treeArr, treeArr[index].oid).length > 0) {
           // 递归调用此函数
-          treeArr[index].children = _this.arrayToTree(treeArr, treeArr[index].id);
+          treeArr[index].children = _this.arrayToTree(treeArr, treeArr[index].oid);
         }
-        treeArr[index].value = treeArr[index].id;
+        treeArr[index].value = treeArr[index].oid;
         treeArr[index].label = treeArr[index].name;
         temp.push(treeArr[index]);
       }

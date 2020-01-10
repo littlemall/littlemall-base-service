@@ -38,6 +38,91 @@ class ScratController extends Controller {
     }
   }
 
+  async fetchCategory() {
+    const { ctx, app } = this;
+    try {
+      const { index } = ctx.query;
+      const fetchUrl = 'https://search.kaola.com/frontCategory/2.html';
+      const result = await app.curl(fetchUrl, {
+        method: 'GET',
+        dataType: 'text',
+      });
+      const $ = cheerio.load(result.data);
+      const scriptDom = $('script');
+      const categoryHtml = $(scriptDom[7]).html();
+      const patt = /(?<=window.__body =).*(?=;)/g;
+      const categoryContent = categoryHtml.match(patt);
+      const categoryObj = JSON.parse(categoryContent);
+      const categoryList = categoryObj.topLevelFrontCategoryVOList;
+      const fetchArr = [];
+      fetchArr.push(categoryList[index]);
+      const resArr = await this.categoryFormatList(fetchArr, [], 0, 0);
+      await this.saveCategoryData(resArr);
+      this.success({
+        length: resArr.length,
+        items: resArr,
+      });
+    } catch (error) {
+      this.fail('API_ERROR');
+      ctx.logger.error('fetchCategory error:', error);
+    }
+  }
+
+  async saveCategoryData(arr) {
+    const { app } = this;
+    for (let i = 0; i < arr.length; i++) {
+      const item = arr[i];
+      const targetPath = path.join(this.config.baseDir, 'app/public/uploads/import/category/');
+      await this.mkdirsSync(targetPath);
+      const target = path.join(this.config.baseDir, 'app/public/uploads/import/category/', `${item.oriId}.jpeg`);
+      if (item.oriphoto && item.oriphoto !== '') {
+        await request.get({ uri: item.oriphoto, encoding: 'binary' }).pipe(fs.createWriteStream(target));
+        const imgPath = app.config.imgprefix + `/public/uploads/import/category/${item.oriId}.jpeg`;
+        item.photo = imgPath;
+      }
+      const categoryRes = await this.ctx.service.goodscategory.admin.query({
+        where: {
+          name: item.name,
+        },
+      });
+      if (categoryRes.length > 0) {
+        await categoryRes[0].update(item);
+        console.log('更新商品分类成功！');
+      } else {
+        await this.ctx.service.goodscategory.admin.create(item);
+        console.log('创建商品分类成功！');
+      }
+    }
+  }
+
+  async categoryFormatList(originArr, resArr, level, pid) {
+    const clevel = level + 1;
+    for (let i = 0; i < originArr.length; i++) {
+      resArr.push({
+        oid: originArr[i].categoryId,
+        name: originArr[i].categoryName,
+        name_simple: originArr[i].categoryName,
+        level: clevel,
+        is_show: 1,
+        pid,
+        sort: 10,
+        photo: '',
+        oriphoto: originArr[i].appIcon,
+      });
+      if (originArr[i].childrenNodeList && originArr[i].childrenNodeList.length > 0) {
+        const cresArr = await this.categoryFormatList(originArr[i].childrenNodeList, resArr, clevel, originArr[i].categoryId);
+        // console.log(cresArr);
+        if (cresArr.length > 0) {
+          resArr = resArr.concat(cresArr);
+        }
+      } else {
+        continue;
+      }
+    }
+    return resArr;
+  }
+
+
   async fetchDetail(url, app, categoryId) {
     const skuUrl = url.split('.html')[0];
     const arrSku = skuUrl.split('/');
