@@ -99,7 +99,7 @@ class GoodsController extends Controller {
       }
 
       if (category) {
-        query.category = {
+        query.category_id = {
           [Op.like]: `%${category}%`,
         };
 
