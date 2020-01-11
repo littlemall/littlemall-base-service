@@ -112,9 +112,6 @@ class GoodsCategoryController extends Controller {
       }
 
       const query = {
-        status: {
-          [Op.gt]: -1,
-        },
       };
       if (name) {
         query.name = {
