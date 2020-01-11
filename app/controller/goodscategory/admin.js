@@ -93,9 +93,17 @@ class GoodsCategoryController extends Controller {
   }
 
   async queryGoodsCategoryList() {
-    const { ctx } = this;
+    const { ctx, app } = this;
+    const { Sequelize } = app.config.sequelizeOp;
+    const { Op } = Sequelize;
     try {
-      const { size, page } = ctx.query;
+      const {
+        size,
+        page,
+        name,
+        level,
+        pid,
+      } = ctx.query;
       const offset = size * (page - 1);
       const limit = parseInt(size, 10);
       if (!page || !size) {
@@ -103,9 +111,27 @@ class GoodsCategoryController extends Controller {
         return;
       }
 
+      const query = {
+        status: {
+          [Op.gt]: -1,
+        },
+      };
+      if (name) {
+        query.name = {
+          [Op.like]: `%${name}%`,
+        };
+      }
+      if (level) {
+        query.level = level;
+      }
+      if (pid) {
+        query.pid = pid;
+      }
+
       const res = await ctx.service.goodscategory.admin.querylist({
         offset,
         limit,
+        where: query,
         order: [
           [ 'created_at', 'DESC' ],
         ],

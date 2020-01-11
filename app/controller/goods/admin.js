@@ -74,7 +74,12 @@ class GoodsController extends Controller {
     try {
       const { Sequelize } = app.config.sequelizeOp;
       const { Op } = Sequelize;
-      const { size, page } = ctx.query;
+      const {
+        size,
+        page,
+        name,
+        category,
+      } = ctx.query;
       const offset = size * (page - 1);
       const limit = parseInt(size, 10);
       if (!page || !size) {
@@ -82,15 +87,29 @@ class GoodsController extends Controller {
         return;
       }
 
+      const query = {
+        status: {
+          [Op.gt]: -1,
+        },
+      };
+      if (name) {
+        query.name = {
+          [Op.like]: `%${name}%`,
+        };
+      }
+
+      if (category) {
+        query.category = {
+          [Op.like]: `%${category}%`,
+        };
+
+      }
+
       const res = await ctx.service.goods.admin.querylist({
         offset,
         limit,
         distinct: true,
-        where: {
-          status: {
-            [Op.gt]: -1,
-          },
-        },
+        where: query,
         include: [
           {
             model: app.model.Goodssku,
