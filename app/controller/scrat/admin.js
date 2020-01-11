@@ -74,10 +74,10 @@ class ScratController extends Controller {
       const item = arr[i];
       const targetPath = path.join(this.config.baseDir, 'app/public/uploads/import/category/');
       await this.mkdirsSync(targetPath);
-      const target = path.join(this.config.baseDir, 'app/public/uploads/import/category/', `${item.oriId}.jpeg`);
+      const target = path.join(this.config.baseDir, 'app/public/uploads/import/category/', `${item.oid}.jpeg`);
       if (item.oriphoto && item.oriphoto !== '') {
         await request.get({ uri: item.oriphoto, encoding: 'binary' }).pipe(fs.createWriteStream(target));
-        const imgPath = app.config.imgprefix + `/public/uploads/import/category/${item.oriId}.jpeg`;
+        const imgPath = app.config.imgprefix + `/public/uploads/import/category/${item.oid}.jpeg`;
         item.photo = imgPath;
       }
       const categoryRes = await this.ctx.service.goodscategory.admin.query({
