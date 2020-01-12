@@ -156,6 +156,18 @@ class GoodsCategoryController extends Controller {
     }
   }
 
+  async deleteCategoryById() {
+    const { ctx } = this;
+    try {
+      const { id } = ctx.request.body;
+      await ctx.service.goodscategory.admin.destroy(id);
+      this.success();
+    } catch (error) {
+      this.fail('API_ERROR');
+      ctx.logger.error('deleteCategoryById error:', error);
+    }
+  }
+
   async updateGoodsCategoryById() {
     const { ctx } = this;
     try {

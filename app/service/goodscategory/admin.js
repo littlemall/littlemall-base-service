@@ -18,6 +18,31 @@ class GoodsCategoryService extends Service {
     return await this.ctx.model.Goodscategory.create(obj);
   }
 
+  async destroy(id) {
+    const { ctx } = this;
+    try {
+      const collect = await ctx.model.Goodscategory.findAll({
+        where: {
+          id,
+        },
+      });
+      if (collect.length < 1) {
+        ctx.status = 400;
+        return Object.assign(500, {
+          msg: 'not found collect',
+        });
+      }
+      const res = await collect[0].destroy();
+      ctx.status = 200;
+      return Object.assign(200, {
+        data: res,
+      });
+    } catch (error) {
+      ctx.status = 500;
+      throw (error);
+    }
+  }
+
   async delete(obj) {
     return await obj.update({
       status: -1,

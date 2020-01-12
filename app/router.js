@@ -20,6 +20,7 @@ module.exports = app => {
   router.get('/goods/admin/query_category', controller.goodscategory.admin.queryGoodsCategoryById);
   router.post('/goods/admin/update_category', controller.goodscategory.admin.updateGoodsCategoryById);
   router.get('/goods/admin/query_category_tree', controller.goodscategory.admin.queryGoodsCategoryTree);
+  router.post('/goods/admin/delete_category', controller.goodscategory.admin.deleteCategoryById);
 
 
   // brand
